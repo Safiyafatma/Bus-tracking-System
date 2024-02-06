@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!-- Created By CodingNepal -->
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>DRIEMS Bus-user login</title>
+      <link rel="stylesheet" href="user-login.css">
+      <link rel="icon" type="icon" href="images/logo.png">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+   <body>
+      <div class="wrapper">
+         <div class="title-text">
+            <div class="title login">
+                LOGIN
+            </div>
+            <div class="title signup">
+                SIGNUP
+            </div>
+         </div>
+         <div class="form-container">
+            <div class="slide-controls">
+               <input type="radio" name="slide" id="login" checked>
+               <input type="radio" name="slide" id="signup">
+               <label for="login" class="slide login">LOGIN</label>
+               <label for="signup" class="slide signup">SIGNUP</label>
+               <div class="slider-tab"></div>
+            </div>
+            <div class="form-inner">
+               <form  class="login" id="loginForm" action="user.html" method="get" >
+                <div class="field">
+                    
+                    <input type="text" placeholder="Enter your email or Mobile Number" required>
+                  </div>
+                  <div class="field">
+                
+                    <input type="password" placeholder="Enter your password" required>
+                  </div>
+                  <div class="pass-link">
+                     <a href="forgot-password.html">Forgot password?</a>
+                  </div>
+                  <div class="field btn" >
+                     <div class="btn-layer"></div>
+                     <input type="submit" value="Login">
+                  </div>
+                  <div class="signup-link">Don't have an account? <a href="">Signup now</a></div>
+                  
+               </form>
+               <form action="#" class="signup">
+                  
+                  <div class="field">
+                    
+                    <input type="text" placeholder="Enter your name" required>
+                  </div>
+                  <div class="field">
+                    
+                    <input type="integer" placeholder="Enter your Mobile Number" required>
+                  </div>
+                  <div class="field">
+                    
+                    <input type="text" placeholder="Enter your email" required>
+                  </div>
+                  <div class="field">
+                   
+                    <input type="password" placeholder="Enter your password" required>
+                  </div>
+                  <div class="field">
+                    
+                     <input type="password" placeholder="Confirm password" required>
+                  </div>
+                  <div class="field btn">
+                     <div class="btn-layer"></div>
+                     <input type="submit" value="Signup">
+                     
+                  </div>
+                  <div class="login-link">Already have an account? <a href=""> Login now</a></div>
+               </form>
+            </div>
+         </div>
+      </div>
+      <script>
+         const loginText = document.querySelector(".title-text .login");
+         const loginForm = document.querySelector("form.login");
+         const loginBtn = document.querySelector("label.login");
+         const signupBtn = document.querySelector("label.signup");
+         const signupLink = document.querySelector("form .signup-link a");
+         signupBtn.onclick = (()=>{
+           loginForm.style.marginLeft = "-50%";
+           loginText.style.marginLeft = "-50%";
+         });
+         loginBtn.onclick = (()=>{
+           loginForm.style.marginLeft = "0%";
+           loginText.style.marginLeft = "0%";
+         });
+         signupLink.onclick = (()=>{
+           signupBtn.click();
+           return false;
+         });
+         loginLink.onclick = (()=>{
+            loginBtn.click();
+            return false;
+          });
+            document.getElementById("loginForm").addEventListener("submit", function(event) {
+                event.preventDefault(); // Prevent the default form submission behavior
+                window.location.href = this.action; // Redirect to the specified URL (home.html)
+            });
+        
+        
+      </script>
+   </body>
+</html>

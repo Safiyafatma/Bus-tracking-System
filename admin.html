@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DRIEMS BUS</title>
+  <link rel="stylesheet" href="admin.css" id="theme">
+  <link rel="icon" type="icon" href="images/logo.png">
+  <link rel="icon" type="icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.google.com/specimen/Poppins?preview.text=Hello%20dear&preview.text_type=custom" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+</head>
+
+<body>
+  <div class="grid-container">
+
+    <!-- Header -->
+    <header class="header">
+      
+      
+      <div class="menu-icon" onclick="openSidebar()">
+        <span class="material-icons-outlined">menu</span>
+      </div>
+      <div class="header-left">
+        <img src="images/newbg.png">
+        <h3></h3>
+      </div>
+      <div class="header-right">
+        <span class="material-icons-outlined">account_circle</span> ADMIN
+      </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- Sidebar -->
+    <aside id="sidebar">
+      <div class="sidebar-title">
+        <div class="sidebar-brand">
+          DRIEMS BUS
+        </div>
+        <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
+      </div>
+
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item">
+          <a href="#" onclick="openTab('dashboard')">
+            <span class="material-icons-outlined tab-links active-link">dashboard</span> Dashboard
+          </a>
+        </li>
+        <li class="sidebar-list-item">
+          <a href="#" onclick="openTab('manage_drivers')">
+            <span class="material-icons-outlined tab-links">group</span> Manage Drivers
+          </a>
+        </li>
+        <li class="sidebar-list-item">
+          <a href="#" onclick="openTab('manage_buses')">
+            <span class="material-icons-outlined tab-links">directions_bus</span> Manage Buses
+          </a>
+        </li>
+        <li class="sidebar-list-item">
+          <a href="#" onclick="openTab('set_routes')">
+            <span class="material-icons-outlined tab-links">map</span> Set Routes
+          </a>
+        </li>
+        <li class="sidebar-list-item">
+          <a href="#" onclick="openTab('feedback')">
+            <span class="material-icons-outlined tab-links">feedback</span> Feedback
+          </a>
+        </li>
+        <li class="sidebar-list-item">
+          <a href="#" onclick="logout()">
+            <span class="material-icons-outlined">logout</span> Logout
+          </a>
+        </li>
+      </ul>
+    </aside>
+    <!-- End Sidebar -->
+
+    <!-- Main -->
+    <main class="main-container tab-contents active-tab" id="dashboard">
+      <div class="main-title">
+        <h2>DASHBOARD</h2>
+      </div>
+        <div class="main-cards">
+
+          <div class="card">
+            <div class="card-inner">
+              <h2>BUSES</h2>
+              <span class="material-icons-outlined">
+                directions_bus
+                </span>
+            </div>
+            <h1>50</h1>
+          </div>
+
+          <div class="card">
+            <div class="card-inner">
+              <h2>DRIVERS</h2>
+              <span class="material-icons-outlined">group</span>
+            </div>
+            <h1>45</h1>
+          </div>
+
+          <div class="card">
+            <div class="card-inner">
+              <h2>ROUTES</h2>
+              <span class="material-icons-outlined">map</span>
+            </div>
+            <h1>45</h1>
+          </div>
+
+          <div class="card">
+            <div class="card-inner">
+              <h2>FEEDBACK</h2>
+              <span class="material-icons-outlined">feedback</span>
+            </div>
+            <h1>2</h1>
+          </div>
+    </main>
+
+    <section id="manage_buses" class="tab-contents">
+      <h2>MANAGE BUSES</h2>
+
+      <!-- Add Bus Form -->
+      <div id="search-bar">
+        <label for="searchBus">Search:</label>
+        <input type="text" id="searchBus" placeholder="Enter bus number" oninput="searchBus()">
+        <button onclick="toggleAddBusForm()">Add Bus</button>
+      </div>
+
+      <!-- Bus Table -->
+      <table>
+        <thead>
+          <tr>
+            <th>Bus Number</th>
+            <th>Reg Plate</th>
+            <th>Num of Seats</th>
+            <th>Assigned Driver</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="busTableBody">
+          <!-- Table rows will be dynamically added here -->
+        </tbody>
+      </table>
+
+      <!-- Edit Bus Modal -->
+      <!-- Add Bus Modal -->
+<div id="addBusModal" class="modal">
+  <span class="close" onclick="closeAddBusModal()">&times;</span>
+  <div class="modal-content">
+    <label class="modal-label" for="addBusNo">Bus No:</label>
+    <input class="modal-input" type="text" id="addBusNo">
+
+    <label class="modal-label" for="addRegPlate">Registration Plate:</label>
+    <input class="modal-input" type="text" id="addRegPlate">
+
+    <label class="modal-label" for="addSeats">No. of Seats:</label>
+    <input class="modal-input" type="number" id="addSeats">
+
+    <label class="modal-label" for="addAssignedDriver">Assigned Driver:</label>
+    <input class="modal-input" type="text" id="addAssignedDriver">
+
+    <button class="modal-btn" onclick="addBusFromModal()">Add Bus</button>
+  </div>
+</div>
+
+<!-- Edit Bus Modal -->
+<div id="editBusModal" class="modal">
+  <span class="close" onclick="closeEditBusModal()">&times;</span>
+  <div class="modal-content">
+    <label class="modal-label" for="editBusNo">Bus No:</label>
+    <input class="modal-input" type="text" id="editBusNo" readonly>
+
+    <label class="modal-label" for="editRegPlate">Registration Plate:</label>
+    <input class="modal-input" type="text" id="editRegPlate">
+
+    <label class="modal-label" for="editSeats">No. of Seats:</label>
+    <input class="modal-input" type="number" id="editSeats">
+
+    <label class="modal-label" for="editAssignedDriver">Assigned Driver:</label>
+    <input class="modal-input" type="text" id="editAssignedDriver">
+
+    <button class="modal-btn" onclick="saveEditBus()">Save Changes</button>
+  </div>
+</div>
+
+
+
+    </section>
+
+    <section id="manage_drivers" class="tab-contents">
+      <h2>MANAGE DRIVERS</h2>
+
+      <!-- Add Driver Form -->
+      <div id="search-bar">
+        <label for="searchDriver">Search:</label>
+        <input type="text" id="searchDriver" placeholder="Enter driver name" oninput="searchDriver()">
+        <button onclick="toggleAddDriverForm()">Add Driver</button>
+      </div>
+
+      <!-- Driver Table -->
+      <table>
+        <thead>
+          <tr>
+            <th>Driver Unique ID</th>
+            <th>Full Name</th>
+            <th>Phone Number</th>
+            <th>Email ID</th>
+            <th>Assigned Bus</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="driverTableBody">
+          <!-- Table rows will be dynamically added here -->
+        </tbody>
+      </table>
+
+      <!-- Add Bus Modal -->
+<!-- Add Driver Modal -->
+<div id="addDriverModal" class="modal">
+  <span class="close" onclick="closeAddDriverModal()">&times;</span>
+  <div class="modal-content">
+    <label class="modal-label" for="addDriverId">Driver ID:</label>
+    <input class="modal-input" type="text" id="addDriverId">
+
+    <label class="modal-label" for="addFullName">Full Name:</label>
+    <input class="modal-input" type="text" id="addFullName">
+
+    <label class="modal-label" for="addPhoneNumber">Phone Number:</label>
+    <input class="modal-input" type="tel" id="addPhoneNumber">
+
+    <label class="modal-label" for="addEmail">Email:</label>
+    <input class="modal-input" type="email" id="addEmail">
+
+    <label class="modal-label" for="addAssignedBus">Assigned Bus:</label>
+    <input class="modal-input" type="text" id="addAssignedBus">
+
+    <button class="modal-btn" onclick="addDriverFromModal()">Add Driver</button>
+  </div>
+</div>
+
+<!-- Edit Driver Modal -->
+<div id="editDriverModal" class="modal">
+  <span class="close" onclick="closeEditDriverModal()">&times;</span>
+  <div class="modal-content">
+    <label class="modal-label" for="editDriverId">Driver ID:</label>
+    <input class="modal-input" type="text" id="editDriverId" readonly>
+
+    <label class="modal-label" for="editFullName">Full Name:</label>
+    <input class="modal-input" type="text" id="editFullName">
+
+    <label class="modal-label" for="editPhoneNumber">Phone Number:</label>
+    <input class="modal-input" type="tel" id="editPhoneNumber">
+
+    <label class="modal-label" for="editEmail">Email:</label>
+    <input class="modal-input" type="email" id="editEmail">
+
+    <label class="modal-label" for="editAssignedBus">Assigned Bus:</label>
+    <input class="modal-input" type="text" id="editAssignedBus">
+
+    <button class="modal-btn" onclick="saveEditDriver()">Save Changes</button>
+  </div>
+</div>
+
+    </section>
+<!-- Set Routes Tab -->
+<section id="set_routes" class="tab-contents">
+  <h2>SET ROUTES</h2>
+
+  <div id="search-bar">
+    <label for="searchRoute">Search:</label>
+    <input type="text" id="searchRoute" placeholder="Enter route name" oninput="searchRoute()">
+    <button onclick="toggleAddRouteForm()">Add Route</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Route No.</th>
+        <th>Route Name</th>
+        <th>Bus No.</th>
+        <th>Source</th>
+        <th>Destination</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="routeTableBody">
+      <!-- Table rows will be dynamically added here -->
+    </tbody>
+  </table>
+
+  <!-- Edit Route Modal -->
+  <div id="editRouteModal" class="modal">
+    <span class="close" onclick="closeEditRouteModal()">&times;</span>
+    <div class="modal-content">
+      <!-- Add form fields for editing route details -->
+      <label class="modal-label" for="editRouteNo">Route No.:</label>
+      <input class="modal-input" type="text" id="editRouteNo" readonly>
+
+      <label class="modal-label" for="editRouteName">Route Name:</label>
+      <input class="modal-input" type="text" id="editRouteName" >
+
+      <label class="modal-label" for="editBusNum">Bus No.:</label>
+      <input class="modal-input" type="text" id="editBusNum" >
+
+      <label class="modal-label" for="editSource">Source:</label>
+      <input class="modal-input" type="text" id="editSource" >
+
+      <label class="modal-label" for="editDestination">Destination</label>
+      <input class="modal-input" type="text" id="editDestination" >
+
+      <!-- Add other form fields as needed -->
+
+      <button class="modal-btn" onclick="saveEditRoute()">Save</button>
+    </div>
+  </div>
+
+  <!-- Add Route Modal -->
+  <div id="addRouteModal" class="modal">
+    <span class="close" onclick="closeAddRouteModal()">&times;</span>
+    <div class="modal-content">
+      <!-- Add form fields for adding a new route -->
+      <label class="modal-label" for="addRouteNo">Route No.:</label>
+      <input class="modal-input" type="text" id="addRouteNo">
+
+      <label class="modal-label" for="addRouteName">Route Name:</label>
+      <input class="modal-input" type="text" id="addRouteName">
+
+      <label class="modal-label" for="addBusNum">Bus No.:</label>
+      <input class="modal-input" type="text" id="addBusNum">
+
+      <label class="modal-label" for="addSource">Source:</label>
+      <input class="modal-input" type="text" id="addSource">
+
+      <label class="modal-label" for="addDestination">Destination:</label>
+      <input class="modal-input" type="text" id="addDestination">
+
+      <!-- Add other form fields as needed -->
+
+      <button class="modal-btn" onclick="addRouteFromModal()">Add</button>
+    </div>
+  </div>
+</section>
+
+    <!-- Other Sections (Set Routes, Feedback) -->
+    <section id="feedback" class="tab-contents">
+      <h2>Feedback</h2>
+    
+      <div id="feedbackContainer">
+        <!-- Feedback messages will be displayed here -->
+      </div>
+    </section>
+  </div>
+  
+  <script>
+    function openSidebar() {
+      document.getElementById("sidebar").style.width = "260px";
+    }
+
+    function closeSidebar() {
+      document.getElementById("sidebar").style.width = "0";
+    }
+  </script>
+  <script>
+    function openTab(tabName) {
+      // Hide all tab contents
+      var tabs = document.getElementsByClassName('tab-contents');
+      for (var i = 0; i < tabs.length; i++) {
+        tabs[i].style.display = 'none';
+      }
+  
+      // Remove 'active-link' class from all tab links
+      var tabLinks = document.getElementsByClassName('tab-links');
+      for (var i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].classList.remove('active-link');
+      }
+  
+      // Show the selected tab content
+      document.getElementById(tabName).style.display = 'block';
+  
+      // Add 'active-link' class to the clicked tab link
+      var activeTabLink = document.querySelector(`[onclick="openTab('${tabName}')"]`);
+      activeTabLink.classList.add('active-link');
+    }
+  </script>
+  
+
+
+  <script>
+    // Sample data for buses and drivers
+const busesData = [
+{ busNo: 'Bus001', registrationPlate: 'ABC123', seats: 30, assignedDriver: 'John Doe' },
+{ busNo: 'Bus002', registrationPlate: 'ABC345', seats: 40, assignedDriver: 'John Doe' },
+{ busNo: 'Bus003', registrationPlate: 'ABC456', seats: 35, assignedDriver: 'John Abrahim' },
+{ busNo: 'Bus004', registrationPlate: 'ABC678', seats: 20, assignedDriver: 'Limcoln coln' },
+{ busNo: 'Bus005', registrationPlate: 'ABC456', seats: 50, assignedDriver: 'Denver Trump' },
+// Add more data as needed...
+];
+
+const driversData = [
+{ driverId: 'Driver001', fullName: 'John Doe', phoneNumber: '1234567890', email: 'john@example.com', assignedBus: 'Bus001' },
+{ driverId: 'Driver002', fullName: 'Jackson Dert', phoneNumber: '923788900', email: 'jackson@example.com', assignedBus: 'Bus002' },
+{ driverId: 'Driver003', fullName: 'Denver Trump', phoneNumber: '9865567890', email: 'john@example.com', assignedBus: 'Bus003' },
+{ driverId: 'Driver004', fullName: 'Limcoln coln', phoneNumber: '9675467890', email: 'Lincoln@example.com', assignedBus: 'Bus004' },
+{ driverId: 'Driver005', fullName: 'David Der ', phoneNumber: '7765467890', email: 'David@example.com', assignedBus: 'Bus005' },
+{ driverId: 'Driver006', fullName: 'John Abrahim', phoneNumber: '6578567890', email: 'john@example.com', assignedBus: 'Bus006' },
+
+// Add more data as needed...
+];
+
+// Function to initialize the table with data
+function initTable() {
+// Initialize Bus Table
+const busTableBody = document.getElementById('busTableBody');
+busTableBody.innerHTML = '';
+busesData.slice(0, 10).forEach(bus => {
+  const row = createBusRow(bus);
+  busTableBody.appendChild(row);
+});
+
+// Initialize Driver Table
+const driverTableBody = document.getElementById('driverTableBody');
+driverTableBody.innerHTML = '';
+driversData.slice(0, 10).forEach(driver => {
+  const row = createDriverRow(driver);
+  driverTableBody.appendChild(row);
+});
+}
+
+// Function to create a row for the Bus Table
+function createBusRow(bus) {
+const row = document.createElement('tr');
+row.innerHTML = `
+  <td>${bus.busNo}</td>
+  <td>${bus.registrationPlate}</td>
+  <td>${bus.seats}</td>
+  <td>${bus.assignedDriver}</td>
+  <td class="actions">
+    <span class="edit-btn" onclick="openEditBusModal('${bus.busNo}')">Edit</span>
+    <span class="delete-btn" onclick="deleteBus('${bus.busNo}')">Delete</span>
+  </td>
+`;
+return row;
+}
+
+// Function to create a row for the Driver Table
+function createDriverRow(driver) {
+const row = document.createElement('tr');
+row.innerHTML = `
+  <td>${driver.driverId}</td>
+  <td>${driver.fullName}</td>
+  <td>${driver.phoneNumber}</td>
+  <td>${driver.email}</td>
+  <td>${driver.assignedBus}</td>
+  <td class="actions">
+    <span class="edit-btn" onclick="openEditDriverModal('${driver.driverId}')">Edit</span>
+    <span class="delete-btn" onclick="deleteDriver('${driver.driverId}')">Delete</span>
+  </td>
+`;
+return row;
+}
+
+// Function to open the Add Bus Modal
+function toggleAddBusForm() {
+document.getElementById('addBusModal').style.display = 'block';
+}
+
+// Function to close the Add Bus Modal
+function closeAddBusModal() {
+document.getElementById('addBusModal').style.display = 'none';
+}
+
+// Function to open the Edit Bus Modal
+function openEditBusModal(busNo) {
+const bus = busesData.find(b => b.busNo === busNo);
+document.getElementById('editBusNo').value = bus.busNo;
+document.getElementById('editRegPlate').value = bus.registrationPlate;
+document.getElementById('editSeats').value = bus.seats;
+document.getElementById('editAssignedDriver').value = bus.assignedDriver;
+
+document.getElementById('editBusModal').style.display = 'block';
+}
+
+// Function to close the Edit Bus Modal
+function closeEditBusModal() {
+document.getElementById('editBusModal').style.display = 'none';
+}
+
+// Function to add a new bus from the Add Bus Modal
+function addBusFromModal() {
+const busNo = document.getElementById('addBusNo').value;
+const registrationPlate = document.getElementById('addRegPlate').value;
+const seats = document.getElementById('addSeats').value;
+const assignedDriver = document.getElementById('addAssignedDriver').value;
+
+if (busNo && registrationPlate && seats && assignedDriver) {
+  const newBus = {
+    busNo: busNo,
+    registrationPlate: registrationPlate,
+    seats: seats,
+    assignedDriver: assignedDriver
+  };
+
+  busesData.push(newBus);
+  closeAddBusModal();
+  initTable();
+} else {
+  alert('Please fill in all fields');
+}
+}
+
+// Function to save changes from the Edit Bus Modal
+function saveEditBus() {
+const busNo = document.getElementById('editBusNo').value;
+const index = busesData.findIndex(b => b.busNo === busNo);
+
+if (index !== -1) {
+  busesData[index].registrationPlate = document.getElementById('editRegPlate').value;
+  busesData[index].seats = document.getElementById('editSeats').value;
+  busesData[index].assignedDriver = document.getElementById('editAssignedDriver').value;
+
+  closeEditBusModal();
+  initTable();
+}
+}
+
+// Function to delete a bus
+function deleteBus(busNo) {
+const index = busesData.findIndex(b => b.busNo === busNo);
+
+if (index !== -1) {
+  busesData.splice(index, 1);
+  initTable();
+}
+}
+
+// Function to search for a bus
+function searchBus() {
+const searchTerm = document.getElementById('searchBus').value.toLowerCase();
+
+const filteredBuses = busesData.filter(bus =>
+  bus.busNo.toLowerCase().includes(searchTerm)
+);
+
+const busTableBody = document.getElementById('busTableBody');
+busTableBody.innerHTML = '';
+
+filteredBuses.slice(0, 10).forEach(bus => {
+  const row = createBusRow(bus);
+  busTableBody.appendChild(row);
+});
+}
+
+// Initialize the table when the page loads
+initTable();
+
+
+function toggleAddBusForm() {
+document.getElementById('addBusModal').style.display = 'block';
+}
+
+// Function to close the Add Bus Modal
+function closeAddBusModal() {
+document.getElementById('addBusModal').style.display = 'none';
+}
+
+// Function to open the Edit Bus Modal
+function openEditBusModal(busNo) {
+const bus = busesData.find(b => b.busNo === busNo);
+document.getElementById('editBusNo').value = bus.busNo;
+document.getElementById('editRegPlate').value = bus.registrationPlate;
+document.getElementById('editSeats').value = bus.seats;
+document.getElementById('editAssignedDriver').value = bus.assignedDriver;
+
+document.getElementById('editBusModal').style.display = 'block';
+}
+
+// Function to close the Edit Bus Modal
+function closeEditBusModal() {
+document.getElementById('editBusModal').style.display = 'none';
+}
+
+// Function to add a new bus from the Add Bus Modal
+function addBusFromModal() {
+const busNo = document.getElementById('addBusNo').value;
+const registrationPlate = document.getElementById('addRegPlate').value;
+const seats = document.getElementById('addSeats').value;
+const assignedDriver = document.getElementById('addAssignedDriver').value;
+
+if (busNo && registrationPlate && seats && assignedDriver) {
+  const newBus = {
+    busNo: busNo,
+    registrationPlate: registrationPlate,
+    seats: seats,
+    assignedDriver: assignedDriver
+  };
+
+  busesData.push(newBus);
+  closeAddBusModal();
+  initTable();
+} else {
+  alert('Please fill in all fields');
+}
+}
+
+// Function to save changes from the Edit Bus Modal
+function saveEditBus() {
+const busNo = document.getElementById('editBusNo').value;
+const index = busesData.findIndex(b => b.busNo === busNo);
+
+if (index !== -1) {
+  busesData[index].registrationPlate = document.getElementById('editRegPlate').value;
+  busesData[index].seats = document.getElementById('editSeats').value;
+  busesData[index].assignedDriver = document.getElementById('editAssignedDriver').value;
+
+  closeEditBusModal();
+  initTable();
+}
+}
+
+// Function to delete a bus
+function deleteBus(busNo) {
+const index = busesData.findIndex(b => b.busNo === busNo);
+
+if (index !== -1) {
+  busesData.splice(index, 1);
+  initTable();
+}
+}
+
+// Function to search for a bus
+function searchBus() {
+const searchTerm = document.getElementById('searchBus').value.toLowerCase();
+
+const filteredBuses = busesData.filter(bus =>
+  bus.busNo.toLowerCase().includes(searchTerm)
+);
+
+const busTableBody = document.getElementById('busTableBody');
+busTableBody.innerHTML = '';
+
+filteredBuses.slice(0, 10).forEach(bus => {
+  const row = createBusRow(bus);
+  busTableBody.appendChild(row);
+});
+}
+
+// Initialize the table when the page loads
+initTable();
+
+
+
+// Function to open the Add Driver Modal
+function toggleAddDriverForm() {
+  document.getElementById('addDriverModal').style.display = 'block';
+}
+
+// Function to close the Add Driver Modal
+function closeAddDriverModal() {
+  document.getElementById('addDriverModal').style.display = 'none';
+}
+
+// Function to open the Edit Driver Modal
+function openEditDriverModal(driverId) {
+  const driver = driversData.find(d => d.driverId === driverId);
+  document.getElementById('editDriverId').value = driver.driverId;
+  document.getElementById('editFullName').value = driver.fullName;
+  document.getElementById('editPhoneNumber').value = driver.phoneNumber;
+  document.getElementById('editEmail').value = driver.email;
+  document.getElementById('editAssignedBus').value = driver.assignedBus;
+
+  document.getElementById('editDriverModal').style.display = 'block';
+}
+
+// Function to close the Edit Driver Modal
+function closeEditDriverModal() {
+  document.getElementById('editDriverModal').style.display = 'none';
+}
+
+// Function to add a new driver from the Add Driver Modal
+function addDriverFromModal() {
+  const driverId = document.getElementById('addDriverId').value;
+  const fullName = document.getElementById('addFullName').value;
+  const phoneNumber = document.getElementById('addPhoneNumber').value;
+  const email = document.getElementById('addEmail').value;
+  const assignedBus = document.getElementById('addAssignedBus').value;
+
+  if (driverId && fullName && phoneNumber && email && assignedBus) {
+    const newDriver = {
+      driverId: driverId,
+      fullName: fullName,
+      phoneNumber: phoneNumber,
+      email: email,
+      assignedBus: assignedBus
+    };
+
+    driversData.push(newDriver);
+    closeAddDriverModal();
+    initTable();
+  } else {
+    alert('Please fill in all fields');
+  }
+}
+
+// Function to save changes from the Edit Driver Modal
+function saveEditDriver() {
+  const driverId = document.getElementById('editDriverId').value;
+  const index = driversData.findIndex(d => d.driverId === driverId);
+
+  if (index !== -1) {
+    driversData[index].fullName = document.getElementById('editFullName').value;
+    driversData[index].phoneNumber = document.getElementById('editPhoneNumber').value;
+    driversData[index].email = document.getElementById('editEmail').value;
+    driversData[index].assignedBus = document.getElementById('editAssignedBus').value;
+
+    closeEditDriverModal();
+    initTable();
+  }
+}
+
+// Function to delete a driver
+function deleteDriver(driverId) {
+  const index = driversData.findIndex(d => d.driverId === driverId);
+
+  if (index !== -1) {
+    driversData.splice(index, 1);
+    initTable();
+  }
+}
+
+
+// Additional routes data for testing
+const routesData = [
+  { routeNo: 'R001', routeName: 'Route 1', busNum: 'Bus001', source: 'Source1', destination: 'Destination1' },
+  { routeNo: 'R002', routeName: 'Route 2', busNum: 'Bus002', source: 'Source2', destination: 'Destination2' },
+  { routeNo: 'R003', routeName: 'Route 3', busNum: 'Bus003', source: 'Source3', destination: 'Destination3' },
+  { routeNo: 'R004', routeName: 'Route 4', busNum: 'Bus004', source: 'Source4', destination: 'Destination4' },
+  { routeNo: 'R005', routeName: 'Route 5', busNum: 'Bus005', source: 'Source5', destination: 'Destination5' },
+  // Add more data as needed...
+];
+
+function initRouteTable() {
+  const tableBody = document.getElementById('routeTableBody');
+  tableBody.innerHTML = '';
+
+  routesData.forEach(route => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${route.routeNo}</td>
+      <td>${route.routeName}</td>
+      <td>${route.busNum}</td>
+      <td>${route.source}</td>
+      <td>${route.destination}</td>
+      <td class="actions">
+        <span class="edit-btn" onclick="openEditRouteModal('${route.routeNo}')">Edit</span>
+        <span class="delete-btn" onclick="deleteRoute('${route.routeNo}')">Delete</span>
+      </td>
+    `;
+    tableBody.appendChild(row);
+  });
+}
+
+function addRouteFromModal() {
+  const routeNo = document.getElementById('addRouteNo').value;
+  const routeName = document.getElementById('addRouteName').value;
+  const busNum = document.getElementById('addBusNum').value;
+  const source = document.getElementById('addSource').value;
+  const destination= document.getElementById('addDestination').value;
+  // Add other form fields as needed
+
+  if (routeNo && routeName && busNum && source && destination) {
+    const newRoute = {
+      routeNo: routeNo,
+      routeName: routeName,
+      busNum: busNum,
+      source: source,
+      destination: destination
+      // Add other form field values here
+    };
+
+    routesData.push(newRoute);
+    closeAddRouteModal();
+    initRouteTable();
+  } else {
+    alert('Please fill in all fields');
+  }
+}
+
+function openEditRouteModal(routeNo) {
+  const route = routesData.find(r => r.routeNo === routeNo);
+  document.getElementById('editRouteNo').value = route.routeNo;
+  document.getElementById('editRouteName').value = route.routeName;
+  document.getElementById('editBusNum').value = route.busNum;
+  document.getElementById('editSource').value = route.source;
+  document.getElementById('editDestination').value = route.destination;
+  
+  // Set other form field values here
+
+  document.getElementById('editRouteModal').style.display = 'block';
+}
+
+function closeEditRouteModal() {
+  document.getElementById('editRouteModal').style.display = 'none';
+}
+
+function toggleAddRouteForm() {
+  document.getElementById('addRouteModal').style.display = 'block';
+}
+
+function closeAddRouteModal() {
+  document.getElementById('addRouteModal').style.display = 'none';
+}
+  
+function saveEditRoute() {
+  const routeNo = document.getElementById('editRouteNo').value;
+  const index = routesData.findIndex(r => r.routeNo === routeNo);
+
+  if (index !== -1) {
+    routesData[index].routeName = document.getElementById('editRouteName').value;
+    routesData[index].busNum = document.getElementById('editBusNum').value;
+    routesData[index].source = document.getElementById('editSource').value;
+    routesData[index].destination = document.getElementById('editDestination').value;
+
+    closeEditRouteModal();
+    initRouteTable();
+  }
+}
+
+
+function deleteRoute(routeNo) {
+  const index = routesData.findIndex(r => r.routeNo === routeNo);
+
+  if (index !== -1) {
+    routesData.splice(index, 1);
+    initRouteTable();
+  }
+}
+
+function searchRoute() {
+  const searchTerm = document.getElementById('searchRoute').value.toLowerCase();
+
+  const filteredRoutes = routesData.filter(route =>
+    route.routeName.toLowerCase().includes(searchTerm)
+  );
+
+  const tableBody = document.getElementById('routeTableBody');
+  tableBody.innerHTML = '';
+
+  filteredRoutes.forEach(route => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${route.routeNo}</td>
+      <td>${route.routeName}</td>
+      <td>${route.busNo}</td>
+      <td>${route.source}</td>
+      <td>${route.destination}</td>
+      <td class="actions">
+        <span class="edit-btn" onclick="openEditRouteModal('${route.routeNo}')">Edit</span>
+        <span class="delete-btn" onclick="deleteRoute('${route.routeNo}')">Delete</span>
+      </td>
+    `;
+    tableBody.appendChild(row);
+  });
+}
+
+initRouteTable();
+
+  </script>
+  <script>
+    // Sample feedback data for testing
+    const feedbackData = [
+      { id: 1, message: 'Great service!', date: '2023-01-01' },
+      { id: 2, message: 'Needs improvement.', date: '2023-01-02' },
+      // Add more feedback as needed...
+    ];
+    
+    function initFeedbackSection() {
+      const feedbackContainer = document.getElementById('feedbackContainer');
+      feedbackContainer.innerHTML = '';
+    
+      feedbackData.slice(0, 10).forEach(feedback => {
+        const feedbackCard = document.createElement('div');
+        feedbackCard.classList.add('feedback-card');
+        feedbackCard.innerHTML = `
+          <p>${feedback.message}</p>
+          <small>${feedback.date}</small>
+        `;
+        feedbackContainer.appendChild(feedbackCard);
+      });
+    }
+    initFeedbackSection();
+    </script>
+    <script>
+      function logout() {
+        // Your logout logic here
+        // For example, redirecting to a login page
+        window.location.href = 'index.html';
+      }
+      
+    </script>
+    
+</body>
+
+</html>

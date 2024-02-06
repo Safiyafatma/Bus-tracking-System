@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DRIEMS BUS</title>
+  <link rel="stylesheet" href="driver.css" id="theme">
+  <link rel="icon" type="icon" href="images/logo.png">
+  <link rel="icon" type="icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.google.com/specimen/Poppins?preview.text=Hello%20dear&preview.text_type=custom" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+
+</head>
+<body>
+    <div class="grid-container">
+  
+      <!-- Header -->
+      <header class="header">
+        <div class="header-left">
+          <img src="images/logo.png">
+          <h3>DRIEMS BUS</h3>
+        </div>
+        
+        <div class="header-right" onclick="OpentoggleSidebar()" >
+          <span class="material-icons-outlined" id="account">account_circle</span>
+        </div>
+        <div id="sidebar">
+         <span id="close-icon" class="material-icons-outlined" onclick="ClosetoggleSidebar()">closeicon</span>
+          <div id="user-info">
+            
+            <div id="user-name">John Doe</div>
+            <div id="user-mail">John@gmail.com</div>
+            <div id="phone-no">1234567890</div>
+            
+          </div>
+          <button onclick="openEditProfileForm()">Edit Profile</button>
+          <button onclick="logout()" id="logout">Logout</button>
+        </div>
+        <div id="edit-profile-form-overlay">
+          <div id="edit-profile-form">
+            <span id="close-icon" class="material-icons-outlined" onclick="closeEditProfileForm()">closeicon</span>
+            <label for="name">Name:</label>
+            <input type="text" id="name">
+            <label for="email">Email:</label>
+            <input type="email" id="email">
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone">
+            <button onclick="saveProfile()">Save</button>
+            
+          </div>
+        </div>
+
+      </header>
+      <div id="text">You are here</div>
+      <div id="map">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d16201.899250552897!2d85.9830105450363!3d20.55461249189166!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a196c0955555555%3A0x3ed889d8bbd64f1d!2sDRIEMS(Dhaneswar%20Rath%20Institute%20of%20Engineering%20and%20Medical%20Sciences)!5e0!3m2!1sen!2sin!4v1697050777108!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+
+      
+    </div>
+
+    <script>
+      function OpentoggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.style.right = '0';
+      }
+  
+      function ClosetoggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.style.right = '-350px';
+      }
+
+
+      function openEditProfileForm() {
+        // Get the current values from the sidebar
+        const currentName = document.getElementById('user-name').textContent;
+        const currentEmail = document.getElementById('user-mail').textContent;
+        const currentPhone = document.getElementById('phone-no').textContent;
+      
+        // Populate the edit profile form with the current values
+        document.getElementById('name').value = currentName;
+        document.getElementById('email').value = currentEmail;
+        document.getElementById('phone').value = currentPhone;
+      
+        // Show the edit profile form overlay
+        document.getElementById('edit-profile-form-overlay').style.display = 'flex';
+      }
+      
+
+    function closeEditProfileForm() {
+      document.getElementById('edit-profile-form-overlay').style.display = 'none';
+    }
+
+
+    function saveProfile() {
+      const newName = document.getElementById('name').value;
+      document.getElementById('user-name').textContent = newName;
+      const newEmail = document.getElementById('email').value;
+      document.getElementById('user-mail').textContent = newEmail;
+      const newNumber = document.getElementById('phone').value;
+      document.getElementById('phone-no').textContent = newNumber;
+      closeEditProfileForm();
+    }
+
+    function logout() {
+        window.location.href = 'index.html';
+    }
+
+    
+  </script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    initMap()
+  });
+</script>
+
+</body>
+</html>
